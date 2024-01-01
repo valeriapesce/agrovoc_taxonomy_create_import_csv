@@ -1,0 +1,10 @@
+type: module
+name: AIMS AGROVOC import via CSV
+description: 'Module to import AGROVOC to a custom Drupal taxonomy.'
+package: AIMS
+core: 10.x
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:content_translation
+  - migrate_plus:migrate_plus
+  - migrate_source_csv:migrate_source_csv

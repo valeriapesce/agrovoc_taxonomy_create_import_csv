@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the AIMS AGROVVOC Migration module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function agrovoc_taxonomy_create_import_csv_install() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function agrovoc_taxonomy_create_import_csv_uninstall() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+
+  $connection = \Drupal\Core\Database\Database::getConnection('default');
+
+  $connection->delete('config')
+    ->condition('name', 'migrate_plus.migration.agrovoc_%', 'LIKE')
+    ->execute();
+
+  $connection->delete('config')
+    ->condition('name', 'migrate_plus.migration_group.agrovoc_%', 'LIKE')
+    ->execute();
+
+
+  drupal_flush_all_caches();
+}
+
