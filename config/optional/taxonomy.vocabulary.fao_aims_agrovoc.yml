@@ -1,0 +1,7 @@
+langcode: und
+status: true
+dependencies: {  }
+name: 'FAO AGROVOC'
+vid: fao_aims_agrovoc
+description: ''
+weight: 0
