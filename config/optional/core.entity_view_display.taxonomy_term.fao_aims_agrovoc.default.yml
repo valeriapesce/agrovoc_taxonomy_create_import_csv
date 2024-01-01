@@ -1,0 +1,127 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_alternative_labels
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_broader
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_definition
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_narrower
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_note
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_related
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_uri
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_uri_link
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_fao_agrovoc_code
+    - taxonomy.vocabulary.fao_aims_agrovoc
+  module:
+    - ds
+third_party_settings:
+  ds:
+    layout:
+      id: layout_onecol
+      library: layout_discovery/onecol
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - taxonomy_term_title
+        - langcode
+        - field_agrovoc_definition
+        - field_agrovoc_note
+        - field_fao_agrovoc_code
+        - field_agrovoc_uri
+        - field_agrovoc_alternative_labels
+        - field_agrovoc_broader
+        - field_agrovoc_related
+    fields:
+      taxonomy_term_title:
+        plugin_id: taxonomy_term_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          link: false
+          'link class': ''
+          wrapper: ''
+          class: ''
+id: taxonomy_term.fao_aims_agrovoc.default
+targetEntityType: taxonomy_term
+bundle: fao_aims_agrovoc
+mode: default
+content:
+  field_agrovoc_alternative_labels:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_agrovoc_broader:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_agrovoc_definition:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_agrovoc_narrower:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_agrovoc_note:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_agrovoc_related:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_agrovoc_uri:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_fao_agrovoc_code:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  langcode:
+    type: language
+    label: inline
+    settings:
+      link_to_entity: false
+      native_language: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  description: true
+  field_agrovoc_uri_link: true
+  search_api_excerpt: true

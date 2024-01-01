@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_agrovoc_narrower
+    - taxonomy.vocabulary.fao_aims_agrovoc
+id: taxonomy_term.fao_aims_agrovoc.field_agrovoc_narrower
+field_name: field_agrovoc_narrower
+entity_type: taxonomy_term
+bundle: fao_aims_agrovoc
+label: Narrower
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      fao_aims_agrovoc: fao_aims_agrovoc
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
