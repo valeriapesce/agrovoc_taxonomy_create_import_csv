@@ -1,0 +1,27 @@
+{
+    "name": "valeriapesce/agrovoc_taxonomy_create_import_csv",
+    "description": "FAO AIMS module to import AGROVOC in a Drupal taxonomy",
+    "type": "drupal-custom-module",
+    "homepage": "https://github.com/valeriapesce/agrovoc_taxonomy_create_import_csv",
+    "authors": [
+        {
+            "name": "FAO AIMS team",
+            "homepage": "https://aims.fao.org",
+            "role": "Maintainer"
+        }
+    ],
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "stable",
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "require": {
+        "drupal/migrate_tools": "^5",
+        "drupal/migrate_plus": "^5",
+		"drupal/content_translation",
+		"drupal/migrate_source_csv"		
+    }
+}
