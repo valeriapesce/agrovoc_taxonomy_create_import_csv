@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  optional:
+    config:
+      - language.entity.en
+      - field.field.taxonomy_term.fao_aims_agrovoc.field_fao_agrovoc_code
+      - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_uri
+id: agrovoc_data_core_en_csv_importer
+migration_group: agrovoc_import
+migration_tags:
+  - AIMS
+  - fao_aims_agrovoc
+label: 'Migration file to import AGROVOC data in EN from CSV file(s), with no relations.'
+source:
+  plugin: csv
+  path: modules/custom/agrovoc_taxonomy_create_import_csv/sources/agrovoc-data-en.csv
+  header_row_count: 1
+  ids: [code]
+process:
+  name: label_en
+  field_fao_agrovoc_code: code
+  field_agrovoc_uri: concept
+  field_agrovoc_note/value: note
+  field_agrovoc_alternative_labels:
+    -
+      plugin: skip_on_empty
+      source: all_alternative_en
+      method: process
+      message: 'Row does not contain alt labels.'
+    -
+      plugin: explode
+      delimiter: '|'
+  field_agrovoc_definition/value: definition_en
+  # uri_link/url: concept
+  langcode:
+    -
+      plugin: default_value
+      default_value: 'en'
+  vid:
+    -
+      plugin: default_value
+      default_value: 'fao_aims_agrovoc'
+  status:
+    -
+      plugin: default_value
+      default_value: 1
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: fao_aims_agrovoc

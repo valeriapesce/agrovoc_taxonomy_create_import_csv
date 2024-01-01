@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: agrovoc_import
+label: 'AGROVOC concepts CSV import'
+description: 'Group of migrations to import AGROVOC concepts from CSV results of SPARQL queries by language.'
+source_type: 'CSV'
+shared_configuration:
+  source:
+    key: migrate

@@ -1,0 +1,68 @@
+langcode: en
+status: true
+dependencies:
+  optional:
+    config:
+      - language.entity.fr
+id: agrovoc_data_fr_csv_importer
+migration_group: agrovoc_import
+migration_tags:
+  - AIMS
+  - AGROVOC
+label: 'Migration file to import AGROVOC data in FR from CSV file(s), with no relations.'
+source:
+  plugin: csv
+  path: modules/custom/agrovoc_taxonomy_create_import_csv/sources/agrovoc-data-fr.csv
+  # The number of rows at the beginning which are not data.
+  header_row_count: 1
+  # Is keys needed?
+  #keys:
+  #  - code
+  ids: [code]
+process:
+  tid:
+    -
+      plugin: migration_lookup
+      source: code
+      migration: agrovoc_data_core_en_csv_importer
+      # source_ids: (optional) An array keyed by migration IDs with values that are a list of source properties.
+      # stub_id: (optional) Identifies the migration which will be used to create any stub entities.
+      # no_stub: # (optional) Prevents the creation of a stub entity when no relationship is found in the migration map.
+  langcode:
+    -
+      plugin: default_value
+      default_value: 'fr'
+  vid:
+    -
+      plugin: default_value
+      default_value: 'fao_aims_agrovoc'
+  name:
+    plugin: skip_on_empty
+    method: row
+    source: label_fr
+    message: 'Label in this language is missing'
+  field_fao_agrovoc_code: code
+  field_agrovoc_definition/value: definition_fr
+  field_agrovoc_note/value: note
+  field_agrovoc_alternative_labels:
+    -
+      plugin: skip_on_empty
+      source: all_alternative_fr
+      method: process
+      message: 'Row does not contain alt labels.'
+    -
+      plugin: explode
+      delimiter: '|'
+  status:
+    -
+      plugin: default_value
+      default_value: 1   
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: fao_aims_agrovoc
+  translations: true
+  destination_module: content_translation
+migration_dependencies:
+  required: [] 
+  optional:
+    - agrovoc_data_core_en_csv_importer

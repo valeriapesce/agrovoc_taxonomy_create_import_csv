@@ -1,0 +1,91 @@
+langcode: en
+status: true
+dependencies: {  }
+id: agrovoc_relations_csv_importer
+migration_group: agrovoc_import
+migration_tags:
+  - AIMS
+  - fao_aims_agrovoc
+label: 'Migration file to import AGROVOC broader and related relations from CSV file(s).'
+source:
+  plugin: csv
+  path: modules/custom/agrovoc_taxonomy_create_import_csv/sources/agrovoc-relations.csv
+  # The number of rows at the beginning which are not data.
+  header_row_count: 1
+  # Is keys needed?
+  #keys:
+  #  - code
+  ids: [code]
+process:
+  tid:
+    -
+      plugin: migration_lookup
+      migration: agrovoc_data_core_en_csv_importer
+      source: code
+  parent:
+    -
+      plugin: skip_on_empty
+      source: all_broader
+      method: process
+      message: 'Row does not contain broaders.'
+    -
+      plugin: explode
+      delimiter: '|'
+    -
+      plugin: migration_lookup
+      migration: agrovoc_data_core_en_csv_importer
+      no_stub: true
+  field_agrovoc_broader:
+    -
+      plugin: skip_on_empty
+      source: all_broader
+      method: process
+      message: 'Row does not contain broaders.'
+    -
+      plugin: explode
+      delimiter: '|'
+    -
+      plugin: migration_lookup
+      migration: agrovoc_data_core_en_csv_importer
+      no_stub: true
+  field_agrovoc_narrower:
+    -
+      plugin: skip_on_empty
+      source: all_narrower
+      method: process
+      message: 'Row does not contain narrower.'
+    -
+      plugin: explode
+      delimiter: '|'
+    -
+      plugin: migration_lookup
+      migration: agrovoc_data_core_en_csv_importer
+      no_stub: true
+  field_agrovoc_related:
+    -
+      plugin: skip_on_empty
+      source: all_related
+      method: process
+      message: 'Row does not contain related.'
+    -
+      plugin: explode
+      delimiter: '|'
+    -
+      plugin: migration_lookup
+      migration: agrovoc_data_core_en_csv_importer
+      no_stub: true
+  vid:
+    -
+      plugin: default_value
+      default_value: 'fao_aims_agrovoc'
+  status:
+    -
+      plugin: default_value
+      default_value: 1   
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: fao_aims_agrovoc
+migration_dependencies:
+  required: [] 
+  optional:
+    - agrovoc_data_core_en_csv_importer
