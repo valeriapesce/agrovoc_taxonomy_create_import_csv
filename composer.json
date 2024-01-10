@@ -21,7 +21,6 @@
     "require": {
         "drupal/migrate_tools": "^5",
         "drupal/migrate_plus": "^5",
-		"drupal/content_translation",
-		"drupal/migrate_source_csv"		
+		"drupal/migrate_source_csv": "^8.x-3.5"		
     }
 }
