@@ -11,7 +11,7 @@
         }
     ],
     "license": "GPL-2.0-or-later",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "repositories": {
         "drupal": {
             "type": "composer",
