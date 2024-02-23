@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_agrovoc_note
+    - field.storage.taxonomy_term.field_agrovoc_transliterated_lab
     - taxonomy.vocabulary.fao_aims_agrovoc
-id: taxonomy_term.fao_aims_agrovoc.field_agrovoc_note
-field_name: field_agrovoc_note
+id: taxonomy_term.fao_aims_agrovoc.field_agrovoc_transliterated_lab
+field_name: field_agrovoc_transliterated_lab
 entity_type: taxonomy_term
 bundle: fao_aims_agrovoc
-label: Note
+label: 'Transliterated labels'
 description: ''
 required: false
 translatable: true

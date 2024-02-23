@@ -1,41 +1,38 @@
 langcode: en
 status: true
-dependencies:
-  optional:
-    config:
-      - language.entity.ru
+dependencies: {  }
 id: agrovoc_data_ru_csv_importer
-migration_group: agrovoc_import
+class: null
+field_plugin_method: null
+cck_plugin_method: null
 migration_tags:
   - AIMS
   - AGROVOC
+migration_group: agrovoc_import
 label: 'Migration file to import AGROVOC data in RU from CSV file(s), with no relations.'
 source:
+  constants:
+    langcode: ru
+    unknown: '?'
   plugin: csv
-  path: modules/custom/agrovoc_taxonomy_create_import_csv/sources/agrovoc-data-ru.csv
-  # The number of rows at the beginning which are not data.
+  path: modules/custom/aims_agrovoc_migrate_csv/sources/agrovoc-data-ru.csv
   header_row_count: 1
-  # Is keys needed?
-  #keys:
-  #  - code
-  ids: [code]
+  ids:
+    - code
 process:
   tid:
     -
       plugin: migration_lookup
       source: code
       migration: agrovoc_data_core_en_csv_importer
-      # source_ids: (optional) An array keyed by migration IDs with values that are a list of source properties.
-      # stub_id: (optional) Identifies the migration which will be used to create any stub entities.
-      # no_stub: # (optional) Prevents the creation of a stub entity when no relationship is found in the migration map.
   langcode:
     -
       plugin: default_value
-      default_value: 'ru'
+      default_value: ru
   vid:
     -
       plugin: default_value
-      default_value: 'fao_aims_agrovoc'
+      default_value: fao_aims_agrovoc
   name:
     plugin: skip_on_empty
     method: row
@@ -53,16 +50,56 @@ process:
     -
       plugin: explode
       delimiter: '|'
+  field_agrovoc_transliterated_tit:
+    -
+      plugin: service
+      service: transliteration
+      method: transliterate
+      unpack_source: true
+      source:
+        - label_ru
+        - constants/langcode
+        - constants/unknown
+  field_agrovoc_transliterated_def:
+    -
+      plugin: service
+      service: transliteration
+      method: transliterate
+      unpack_source: true
+      source:
+        - definition_ru
+        - constants/langcode
+        - constants/unknown
+  temp_labels:
+    -
+      plugin: skip_on_empty
+      source: all_alternative_ru
+      method: process
+      message: 'Row does not contain alt labels.'
+    -
+      plugin: str_replace
+      search: '|'
+      replace: ' '
+  field_agrovoc_transliterated_lab:
+    -
+      plugin: service
+      service: transliteration
+      method: transliterate
+      unpack_source: true
+      source:
+        - '@temp_labels'
+        - constants/langcode
+        - constants/unknown
   status:
     -
       plugin: default_value
-      default_value: 1   
+      default_value: 1
 destination:
   plugin: 'entity:taxonomy_term'
   default_bundle: fao_aims_agrovoc
   translations: true
   destination_module: content_translation
 migration_dependencies:
-  required: [] 
+  required: {  }
   optional:
     - agrovoc_data_core_en_csv_importer

@@ -8,12 +8,16 @@ dependencies:
     - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_narrower
     - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_note
     - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_related
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_transliterated_def
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_transliterated_lab
+    - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_transliterated_tit
     - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_uri
     - field.field.taxonomy_term.fao_aims_agrovoc.field_agrovoc_uri_link
     - field.field.taxonomy_term.fao_aims_agrovoc.field_fao_agrovoc_code
     - taxonomy.vocabulary.fao_aims_agrovoc
   module:
     - ds
+    - link
 third_party_settings:
   ds:
     layout:
@@ -30,10 +34,13 @@ third_party_settings:
         - field_agrovoc_definition
         - field_agrovoc_note
         - field_fao_agrovoc_code
-        - field_agrovoc_uri
         - field_agrovoc_alternative_labels
         - field_agrovoc_broader
+        - field_agrovoc_narrower
         - field_agrovoc_related
+        - field_agrovoc_uri
+        - field_agrovoc_uri_link
+        - 'dynamic_token_field:taxonomy_term-skosmos_url'
     fields:
       taxonomy_term_title:
         plugin_id: taxonomy_term_title
@@ -45,6 +52,11 @@ third_party_settings:
           'link class': ''
           wrapper: ''
           class: ''
+      'dynamic_token_field:taxonomy_term-skosmos_url':
+        plugin_id: 'dynamic_token_field:taxonomy_term-skosmos_url'
+        weight: 11
+        label: hidden
+        formatter: default
 id: taxonomy_term.fao_aims_agrovoc.default
 targetEntityType: taxonomy_term
 bundle: fao_aims_agrovoc
@@ -56,7 +68,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 6
+    weight: 5
     region: content
   field_agrovoc_broader:
     type: entity_reference_label
@@ -64,7 +76,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 7
+    weight: 6
     region: content
   field_agrovoc_definition:
     type: basic_string
@@ -79,7 +91,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 9
+    weight: 7
     region: content
   field_agrovoc_note:
     type: basic_string
@@ -102,7 +114,19 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 5
+    weight: 9
+    region: content
+  field_agrovoc_uri_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 10
     region: content
   field_fao_agrovoc_code:
     type: string
@@ -123,5 +147,7 @@ content:
     region: content
 hidden:
   description: true
-  field_agrovoc_uri_link: true
+  field_agrovoc_transliterated_def: true
+  field_agrovoc_transliterated_lab: true
+  field_agrovoc_transliterated_tit: true
   search_api_excerpt: true

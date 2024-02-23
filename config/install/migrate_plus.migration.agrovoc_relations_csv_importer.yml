@@ -17,11 +17,18 @@ source:
   #  - code
   ids: [code]
 process:
+process:
   tid:
+    -
+      plugin: skip_on_empty
+      source: code
+      method: row
+      message: 'Row does not contain code.'
     -
       plugin: migration_lookup
       migration: agrovoc_data_core_en_csv_importer
       source: code
+      no_stub: true
   parent:
     -
       plugin: skip_on_empty
