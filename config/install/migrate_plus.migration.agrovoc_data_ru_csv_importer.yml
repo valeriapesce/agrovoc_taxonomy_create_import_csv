@@ -15,7 +15,7 @@ source:
     langcode: ru
     unknown: '?'
   plugin: csv
-  path: modules/custom/aims_agrovoc_migrate_csv/sources/agrovoc-data-ru.csv
+  path: modules/custom/agrovoc_taxonomy_create_import_csv/sources/agrovoc-data-ru.csv
   header_row_count: 1
   ids:
     - code
