@@ -150,4 +150,3 @@ hidden:
   field_agrovoc_transliterated_def: true
   field_agrovoc_transliterated_lab: true
   field_agrovoc_transliterated_tit: true
-  search_api_excerpt: true
