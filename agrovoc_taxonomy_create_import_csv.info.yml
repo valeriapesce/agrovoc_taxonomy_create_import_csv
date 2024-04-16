@@ -6,12 +6,11 @@ core: 10.x
 core_version_requirement: ^9 || ^10
 dependencies:
   - drupal:text
+  - drupal:filter
   - drupal:link
   - drupal:options
   - drupal:field_ui
-  - drupal:fiter
   - drupal:taxonomy
   - drupal:content_translation
   - migrate_plus:migrate_plus
   - migrate_source_csv:migrate_source_csv
-  - ds:ds
