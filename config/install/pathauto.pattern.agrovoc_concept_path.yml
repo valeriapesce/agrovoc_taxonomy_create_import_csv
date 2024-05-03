@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+    - pathauto
+id: agrovoc_concept_path
+label: 'AGROVOC concept path'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/concepts/[term:field_fao_agrovoc_code:value]'
+selection_criteria:
+  934de174-f900-448a-a11c-72cbb4b62ab0:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 934de174-f900-448a-a11c-72cbb4b62ab0
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      fao_aims_agrovoc: fao_aims_agrovoc
+selection_logic: and
+weight: -5
+relationships: {  }
