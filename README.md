@@ -1,4 +1,4 @@
-_BETA VERSION, DO NOT USE_
+_BETA VERSION, DO NOT USE. OUTDATED INSTRUCTIONS_
 
 The “**AIMS AGROVOC import via CSV**” module (agrovoc_taxonomy_create_import_csv) will create a new “FAO AGROVOC” taxonomy (fao_aims_agrovoc) in Drupal and import data from AGROVOC in the 6 FAO official languages from CSV files resulting from SPARQL queries (the module will include a shell file for updating the CSVs from the SPARQL endpoint in one go via command line).
 
